@@ -6,6 +6,7 @@ const useGetData = (ApiGetNotes) => {
   const [data, setData] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(false);
   const [isSuccess, setIsSuccess] = React.useState(false);
+  const [isError, setIsError] = React.useState(false);
 
   React.useEffect(() => {
     setIsLoading(true);
@@ -14,13 +15,16 @@ const useGetData = (ApiGetNotes) => {
       setIsLoading(false);
       setData(response.data);
       setIsSuccess(true);
+      if (response.error) {
+        setIsError(true);
+      }
     }).catch((_) => {
-      setIsSuccess(false);
+      setIsError(true);
     });
   }, []);
 
   return {
-    data, isLoading, isSuccess,
+    data, isLoading, isSuccess, isError,
   };
 };
 

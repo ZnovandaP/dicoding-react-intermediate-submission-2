@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Navigate } from 'react-router-dom';
 import Container from '../../components/Container';
 import HeadingNoteDetail from './Layout/HeadingNoteDetail';
 import BodyNoteDetail from './Layout/BodyNoteDetail';
@@ -14,9 +14,15 @@ export default function NoteDetailPage() {
   const { id } = useParams();
   const idParams = id.replace(/id-/, '');
 
-  const { data: note, isLoading, isSuccess } = useGetData(getNote(idParams));
+  const {
+    data: note, isLoading, isSuccess, isError,
+  } = useGetData(getNote(idParams));
 
   const { state: language } = useLanguageContext();
+
+  if (isError) {
+    return <Navigate to="/404" />;
+  }
 
   return (
     <>

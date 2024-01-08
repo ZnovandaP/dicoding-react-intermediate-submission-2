@@ -16,7 +16,11 @@ import PrivateRoute from '../components/PrivateRoute';
 
 const RouterNoteApp = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<AppShell />} errorElement={<PageNotFound />}>
+    <Route
+      path="/"
+      element={<AppShell />}
+      errorElement={<PageNotFound />}
+    >
       <Route element={<PrivateRoute />}>
         <Route index element={<NotesPage />} />
         <Route path="arsip">
